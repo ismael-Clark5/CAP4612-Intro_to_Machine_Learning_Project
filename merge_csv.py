@@ -1,25 +1,21 @@
 #!/bin/python
+from typing import List
 import pandas as pd;
 import os
 import random as rd
 import threading as th
 import asyncio
+from sklearn.model_selection import train_test_split
 
 training_df = pd.DataFrame();
 testing_df = pd.DataFrame()
 random = rd.Random()
-threads = []
+threads: List[th.Thread] = []
 
 lock = asyncio.Lock()
-async def loadToMem(df: pd.DataFrame, fileName: str):
-    testing = pd.DataFrame()
-    training =  pd.DataFrame()
-    for i,row in df.iterrows():
-        picked = random.randrange(0,100)
-        if picked < 20:
-            testing = testing.append(row)
-        else:
-            training = training.append(row)
+async def loadToMem(df: pd.DataFrame, cancer: str):
+    df.insert(1, 'cancer', cancer)
+    training, testing = train_test_split(df, train_size=0.8, test_size=0.2)
     await lock.acquire()
     # Lock out other threads to prevent race conditions
     # Prvent data loss when overwritting global dataframe from multiple threads
@@ -30,15 +26,16 @@ async def loadToMem(df: pd.DataFrame, fileName: str):
         testing_df = testing_df.append(testing)
     finally:
         lock.release()
-        print(f'File: {fileName} DONE!')
-
+        print(f'Cancer: {cancer} DONE!')
+count = 0
 #Starts Here   
 for file in os.listdir(os.getcwd()):
     if(file.endswith('.csv')):
-        print(f'Working on File: {file}')
+        cancer = file.split('_')[1]
         file_df = pd.read_csv(file)
-        print(f'Loaded Entries (Rows): {len(file_df.index)}')
-        thread = th.Thread(target=lambda: asyncio.run(loadToMem(file_df, file)))
+        print(f'Cancer: {cancer}, # Rows {len(file_df.index)}')
+        count += len(file_df.index)
+        thread = th.Thread(target=lambda: asyncio.run(loadToMem(file_df, cancer)))
         threads.append(thread)
         thread.start()
 
@@ -47,12 +44,11 @@ print('All Files Loaded, Waiting on threads!')
 for thread in threads:
     thread.join()
 
-#fill empty spaces              
-print('Filling in empty spaces with "N/A"')        
-training_df = training_df.fillna(value='na', axis=0,inplace=True)
-testing_df = testing_df.fillna(value='na', axis=0,inplace=True)
-#Write to CSV 
+print(f'Total Rows Accross all Files: {count}')
 print(f'Training Data # Rows: {len(training_df.index)}')
-training_df.to_csv('training_merged.csv')
 print(f'Testing Data # Rows: {len(testing_df.index)}')
+
+#Write to CSV 
+training_df.to_csv('training_merged.csv')
 testing_df.to_csv('testing_merged.csv')
+print('All Files Written')
