@@ -4,14 +4,28 @@ import pandas as pd;
 import os
 import random as rd
 from sklearn.model_selection import train_test_split
-import typing.Tuple
 
 training_df = pd.DataFrame();
 testing_df = pd.DataFrame()
 random = rd.Random()
 
+cancer_to_int = {
+    'BRCA': 1,
+    'CHOL' : 2,
+    'COAD' : 3,
+    'KICH' : 4,
+    'KIRC' : 5,
+    'KIRP' : 6,
+    'LIHC' : 7,
+    'LUAD' : 8,
+    'LUSC' : 9,
+    'PRAD' : 10,
+    'READ' : 11,
+    'THCA' : 12
+}
+
 def split(df: pd.DataFrame, cancer: str): 
-    df.insert(1, 'cancer', cancer)
+    df.insert(1, 'cancer', cancer_to_int[cancer])
     training, testing = train_test_split(df, train_size=0.8, test_size=0.2)
 
     global training_df
@@ -30,13 +44,14 @@ for file in os.listdir(os.getcwd()):
         count += len(file_df.index)
         split(file_df, cancer)
 
-def getSplits():
-    X_train, X_test, Y_train, Y_test = train_test_split(training_df, testing_df, test_size=0.2)
-    return (X_train, X_test, Y_train, Y_test)
+
 
 print(f'Total Rows Accross all Files: {count}')
 print(f'Training Data # Rows: {len(training_df.index)}')
 print(f'Testing Data # Rows: {len(testing_df.index)}')
+
+#training_df = training_df.fillna(value=0, method='backfill')
+#testing_df = testing_df.fillna(method='backfill')
 
 #Write to CSV
 training_df.to_csv('training_merged.csv')
