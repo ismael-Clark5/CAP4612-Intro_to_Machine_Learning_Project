@@ -19,7 +19,17 @@ cancer_to_int = {
     'THCA' : 12
 }
 int_to_cancer = {v: k for k, v in cancer_to_int.items()}
-def getSplits():
-    unified_df = training_df.append(testing_df)
-    X_train, X_test, Y_train, Y_test = train_test_split(unified_df, test_size=0.2)
-    return (X_train, X_test, Y_train, Y_test)
+
+
+def get_training_split():
+    y = training_df['cancer']
+    x = training_df.drop(labels=['Ensembl_ID', 'cancer', 'Unnamed: 0'], axis=1)
+
+    return x,y
+
+
+def get_test_split():
+    y = testing_df['cancer']
+    x = testing_df.drop(labels=['Ensembl_ID', 'cancer', 'Unnamed: 0'], axis=1)
+
+    return x, y
