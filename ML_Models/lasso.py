@@ -6,27 +6,19 @@ from sklearn.linear_model import Lasso
 from sklearn.pipeline import Pipeline
 import numpy as np
 import data as d
-import os
+import json
 
 
 def init():
-    alpha=0.0
-    model = Lasso()
-    pipeline = Pipeline([
-        ('model', model)
-    ])
-    search = GridSearchCV(pipeline,
-                          {'model__alpha': np.arange(0.1, 10, 0.1)},
-                          cv=5, scoring="neg_mean_squared_error", verbose=1
-    )
-    X, Y = d.get_training_split()
-    search.fit(X, Y)
-    print(search.best_params_)
-    coefficients = search.best_estimator_.named_steps['model'].coef_
-    importance = np.abs(coefficients)
-    print(f'Importance: {len(importance)}, Values: {importance}')
-    test = X.columns.to_numpy()[importance > 0]
-    print(test)
-
+    features_found=dict()
+    for alpha in np.arange(0.1,1,0.1):
+        model = Lasso(alpha=alpha)
+        X, Y = d.get_training_split()
+        model.fit(X, Y)
+        coefficients = model.coef_
+        importance = np.abs(coefficients)
+        features = X.columns.to_numpy()[importance > 0]
+        features_found[alpha] = list(features)
+    json.dump(features_found, open('../Datasets/LASSO.json', 'w'))
 if __name__ == '__main__':
     init()
