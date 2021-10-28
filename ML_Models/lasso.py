@@ -11,7 +11,7 @@ import json
 
 def init():
     features_found=dict()
-    for alpha in np.arange(0.1,1,0.1):
+    for alpha in np.arange(0.001,1,0.05):
         model = Lasso(alpha=alpha)
         X, Y = d.get_training_split()
         model.fit(X, Y)

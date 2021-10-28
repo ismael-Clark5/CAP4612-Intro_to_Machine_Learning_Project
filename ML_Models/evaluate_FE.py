@@ -1,7 +1,7 @@
 import json
-import ML_Models.data as d
+import data as d
 
-training_features, training_labels = d.get_train_split()
+training_features, training_labels = d.get_training_split()
 testing_features, testing_labels = d.get_test_split()
 
 sfm_features = json.load(open('../Datasets/SFM.json', 'r'))
@@ -16,7 +16,7 @@ lasso_dataframes = dict()
 # Because rfe and sfm contain same number type of data, they can be done at the same time.
 for num_features in sfm_features.keys():
     sfm_dataframes[num_features] = training_features.filter(items=sfm_features[num_features], axis=1)
-    rfe_dataframes[num_features] = training_features.filter(items=rfe_dataframes[num_features], axis=1)
+    rfe_dataframes[num_features] = training_features.filter(items=rfe_features[num_features], axis=1)
 
 # Do the same but with LASSO features.
 for alpha in lasso_features.keys():
