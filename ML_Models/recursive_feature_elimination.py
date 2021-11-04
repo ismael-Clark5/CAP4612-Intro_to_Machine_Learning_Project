@@ -14,7 +14,7 @@ log_regression = LR()
 selected_features = dict()
 # The "accuracy" scoring shows the proportion of correct classifications
 
-for min_features_to_select in np.arange(20, 100, 20):
+for min_features_to_select in np.arange(20, 120, 20):
     rfe = RFE(estimator=log_regression, step=0.1,
                 n_features_to_select=min_features_to_select, verbose=0)
 

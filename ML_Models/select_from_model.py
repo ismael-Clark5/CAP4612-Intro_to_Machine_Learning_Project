@@ -8,7 +8,7 @@ X, y = d.get_training_split()
 
 found_features = dict()
 
-for maximum_features_to_select in np.arange(20,100,20):
+for maximum_features_to_select in np.arange(20,120,20):
     sfm_selector = SelectFromModel(estimator=LogisticRegression(), max_features=maximum_features_to_select)
 
     sfm_selector.fit(X, y)
