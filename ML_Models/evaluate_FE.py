@@ -33,58 +33,74 @@ for alpha in lasso_features.keys():
 ## Begin t-SENE
 fig, plots = plt.subplots(2,3)
 df, labels = d.get_training_split()
-tsne = TSNE(n_components=2, verbose=1, perplexity=15)
+tsne = TSNE(n_components=3, verbose=0)
 plotx = 0
 ploty = 0
 for numfeatures, df in sfm_dataframes.items():
-    if plotx == 3:
-        plotx = 0
-        ploty += 1
+    if ploty == 3:
+        plotx += 1
+        ploty = 0
     df_t = tsne.fit_transform(df)
-    tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2'])
-    plt.figure(figsize=(12,8))
-    plots[plotx, ploty].imshow(sns.scatterplot(
+    tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2', 'tSNE3'])
+    plots[plotx, ploty].set_title(f'SFM t-SNE with {numfeatures}')
+    sns.scatterplot(
         x="tSNE1",y="tSNE2",
         data=tsne_for_seaborn,
         hue=labels,
         legend="full",
-    ))
-    plotx += 1
+        palette=sns.color_palette('hls', 12),
+        ax=plots[plotx, ploty]
+    )
+    ploty += 1
 
 plt.show()
 
 fig, plots = plt.subplots(2,3)
+plotx = 0
+ploty = 0
 for numfeatures, df in rfe_dataframes.items():
-    if plotx == 3:
-        plotx = 0
-        ploty += 1
+    if ploty == 3:
+        plotx += 1
+        ploty = 0
     df_t = tsne.fit_transform(df)
     tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2'])
-    plt.figure(figsize=(12,8))
+    plots[plotx, ploty].set_title(f'RFE t-SNE with {numfeatures}')
     sns.scatterplot(
         x="tSNE1",y="tSNE2",
         data=tsne_for_seaborn,
         hue=labels,
         legend="full",
+        palette=sns.color_palette('hls', 12),
+        ax=plots[plotx, ploty]
     )
-    plots[plotx, ploty].imshow(sns.scatterplot(
-        x="tSNE1",y="tSNE2",
-        data=tsne_for_seaborn,
-        hue=labels,
-        legend="full",
-    ))
-    plotx += 1
+    ploty += 1
 plt.show()
 
+fig, plots = plt.subplots(2, 2)
+plotx = 0
+ploty = 0
+counter = 0
 for numfeatures, df in lasso_dataframes.items():
+    if plotx == 2:
+        ploty += 1
+        plotx = 0
+    if counter == 4:
+        plt.show()
+        fig, plots = plt.subplots(2, 2)
+        plotx = 0
+        ploty = 0
+        counter = 0
     df_t = tsne.fit_transform(df)
     tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2'])
-    plt.figure(figsize=(12,8))
+    plots[plotx, ploty].set_title(f'LASSO t-SNE with {numfeatures} features')
     sns.scatterplot(
         x="tSNE1",y="tSNE2",
         data=tsne_for_seaborn,
         hue=labels,
         legend="full",
+        palette=sns.color_palette('hls', 12),
+        ax=plots[plotx, ploty]
     )
-    plt.grid()
+    plotx += 1
+    counter += 1
 plt.show()
