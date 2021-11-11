@@ -1,0 +1,17 @@
+Random Forest
+https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+
+SVM
+https://scikit-learn.org/stable/modules/svm.html
+
+KNN
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+
+KNN with CV
+https://stackoverflow.com/questions/40815008/how-to-do-n-cross-validation-in-knn-python-sklearn
+
+ROC Curve for KNN
+https://stackoverflow.com/questions/52910061/implementing-roc-curves-for-k-nn-machine-learning-algorithm-using-python-and-sci
+
+ROC and AUC
+https://www.analyticsvidhya.com/blog/2020/06/auc-roc-curve-machine-learning/
