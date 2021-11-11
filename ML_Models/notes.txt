@@ -15,3 +15,6 @@ https://stackoverflow.com/questions/52910061/implementing-roc-curves-for-k-nn-ma
 
 ROC and AUC
 https://www.analyticsvidhya.com/blog/2020/06/auc-roc-curve-machine-learning/
+
+Kfold stratified cross validation
+https://www.geeksforgeeks.org/stratified-k-fold-cross-validation/
