@@ -1,5 +1,4 @@
 import json
-from types import ModuleType
 
 from seaborn.palettes import color_palette
 import data as d
@@ -18,8 +17,6 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from sklearn.ensemble import RandomForestClassifier as ran_forest
 import scikitplot as skplt
-import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 training_features, training_labels = d.get_training_split()
@@ -120,12 +117,15 @@ def tsne():
         counter += 1
     plt.show()
 
-def classification(classifier, data_frames, df_name) -> dict:
+def classification(classifier, data_frames) -> tuple[dict, dict, dict, dict, dict, dict]:
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)
-    scores = dict()
-    print(f"Begin Classification for {classifier.__class__.__name__} with Dataframes from {df_name}")
+    accuracy_dict = dict()
+    precision_dict = dict()
+    recall_dict = dict()
+    f1_dict = dict()
+    cm_dict = dict()
+    roc_values = dict()
     for num_features, df in data_frames.items(): 
-        scores[num_features] = []
         accuracies = []
         precisions = []
         recalls = []
@@ -150,26 +150,85 @@ def classification(classifier, data_frames, df_name) -> dict:
             precisions.append(precision_score(y_test, prediction, sample_weight=None, average='micro'))
             recalls.append(recall_score(y_test, prediction, sample_weight=None, average='micro'))
             f1s.append(f1_score(y_test, prediction, sample_weight=None, average='micro'))  
-        cm = confusion_matrix(ground_values, predicted_values)
-        skplt.metrics.plot_roc(y_tests, y_probabilities, title=f'{classifier.__class__.__name__} with {num_features} features (from {df_name})')
-        plt.show()
-        mean_accuracy = np.mean(accuracies)
-        mean_precision = np.mean(precisions)
-        mean_recall = np.mean(recalls)
-        mean_f1 = np.mean(f1s)
-        print(f'Num of Features: {num_features},\nMean Accuracy: {mean_accuracy},\nMean Precision: {mean_precision},\nMean Recall: {mean_recall},\nMean F1: {mean_f1}')
-    return scores
+        cm_dict[num_features] = confusion_matrix(ground_values, predicted_values)
+        accuracy_dict[num_features] = np.mean(accuracies)
+        precision_dict[num_features] =  np.mean(precisions)
+        recall_dict[num_features] = np.mean(recalls)
+        f1_dict[num_features] = np.mean(f1s)
+        roc_values[num_features] = (y_tests, y_probabilities)
+    return (accuracy_dict, precision_dict, recall_dict, f1_dict, cm_dict, roc_values)
 
+
+def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict], model_name: str, classifier_name: str ):
+    accuracy_dict, precision_dict, recall_dict, f1_dict, cm_dict, roc_values_dict = classification_data
+
+    sections = {
+        "Accuracy" : accuracy_dict,
+        "Precision" : precision_dict,
+        "Recall" : recall_dict,
+        "F1": f1_dict
+    }
+    fig, plots = plt.subplots(2,2) 
+    plotx = 0
+    ploty = 0
+    for section, dictionary in sections.items():
+        if plotx == 2:
+            plotx = 0
+            ploty += 1
+        x, y = zip(*(dictionary.items()))
+        plots[plotx, ploty].plot(x, y)
+        plots[plotx, ploty].set_title(f"Mean {section} ({model_name}) using {classifier_name} vs Number of Features")
+        plotx += 1 
+    plt.show()
+
+    fig, plots = plt.subplots(2, (len(cm_dict)//2) + 1)
+    plotx = 0
+    ploty = 0
+    for num_features, confusion_matrix in cm_dict.items():
+        if plotx == 2:
+            plotx = 0
+            ploty += 1
+        #sns.heatmap(confusion_matrix, annot=True, ax=plots[plotx, ploty], robust=True)
+        plots[plotx, ploty].matshow(confusion_matrix, cmap='binary')
+        plots[plotx, ploty].set_title(f"CM ({model_name}) for {classifier_name} with {num_features} Features")
+        plotx +=1 
+    plt.show()
+
+    fig, plots = plt.subplots(2, (len(roc_values_dict)//2) + 1)
+    plotx = 0
+    ploty = 0
+    for num_features, (y_test, y_proba) in roc_values_dict.items():
+        if plotx == 2:
+            plotx = 0
+            ploty += 1
+        skplt.metrics.plot_roc(y_test, y_proba, title=f'ROC ({model_name}) {classifier_name} with {num_features} Features', ax=plots[plotx, ploty] )
+        plotx +=1 
+    plt.show()
+    # accuracy_x, accuracy_y = zip(*(accuracy_dict.items()))
+    # plt.plot(accuracy_x, accuracy_y)
+    # plt.xlabel("Number of Features")
+    # plt.ylabel("Mean Accuracy")
+    # plt.title(f'Mean Accuracy for {model_name} using {classifier_name} V.S Number of Features')
+    # plt.show()
+
+    # presicion_x, precision_y = zip(*(precision_dict.items()))
+    # plt.plot(presicion_x, precision_y)
+    # plt.title(f"Mean Precision for {model_name} using {classifier_name} V.S Number of Features")
+    # plt.xlabel('Number of Features')
+    # plt.ylabel(f'Mean Precision')
+    # plt.show()
 
 classifiers = [KNeighborsClassifier(n_neighbors=5), svm(kernel='linear', probability=True), ran_forest(n_estimators=100)]
 data_frames = [sfm_dataframes, lasso_dataframes, rfe_dataframes]
 
 if __name__ == '__main__':
-    scores = dict()
     for classifier in classifiers:
-        scores[classifier.__class__.__name__] = [("SFM", classification(classifier, sfm_dataframes, "SFM"))]
-        scores[classifier.__class__.__name__].append(["LASSO",classification(classifier, lasso_dataframes, "LASSO")])
-        scores[classifier.__class__.__name__].append(["RFE", classification(classifier, rfe_dataframes, "RFE")])
+        classification_output_sfm = classification(classifier, sfm_dataframes)
+        plot_section(classification_output_sfm, "SFM", classifier.__class__.__name__)
+        classification_output_lasso = classification(classifier, lasso_dataframes)
+        plot_section(classification_output_lasso, "LASSO", classifier.__class__.__name__)
+        classification_output_rfe = classification(classifier, rfe_dataframes)
+        plot_section(classification_output_rfe, "RFE", classifier.__class__.__name__)
     #print(scores)
 
     """
