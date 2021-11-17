@@ -43,6 +43,9 @@ for alpha in lasso_features.keys():
 
 ## Begin t-SENE
 def tsne():
+    """
+        Function handles the plotting of the t-SNE for the diffrent algorithms and the number of features selected in those algorithms
+    """
     fig, plots = plt.subplots(2,3)
     df, labels = d.get_training_split()
     tsne = TSNE(n_components=3, verbose=0)
@@ -117,15 +120,34 @@ def tsne():
         counter += 1
     plt.show()
 
+
 def classification(classifier, data_frames) -> tuple[dict, dict, dict, dict, dict, dict]:
+    """
+    Function handles the classification proccess and extraction of the information from the classification process
+    The classification proccess if verified using Stratified K Fold algorithm with 5 splits per run. 
+    This process is run per number of features selected on the previous steps. 
+    The values for accuracy, percision, recall, f1, and the values for roc curve are then stored in a dictionary, with the mapping of, 
+    number_features -> data structure containing values for the section, (typically list, or numpy array)
+
+    @param: classifier: Classifier to be used in the classification process.
+    @param: data_frames: dictionary containing mapping num_features -> dataframe containing only those features. 
+    @return: Tuple[accuracy, precision, recall, f1, cm, roc_values]
+    """
+
+    #Create stratified kfold object 
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)
+
+    #Define dictinaries to collect results. 
     accuracy_dict = dict()
     precision_dict = dict()
     recall_dict = dict()
     f1_dict = dict()
     cm_dict = dict()
     roc_values = dict()
+
+    #Iterate over the number of features and dataframes in the provided data_frames dictionary
     for num_features, df in data_frames.items(): 
+        #Declare variables to store values for this number of features. 
         accuracies = []
         precisions = []
         recalls = []
@@ -135,11 +157,17 @@ def classification(classifier, data_frames) -> tuple[dict, dict, dict, dict, dic
         probability_values = []
         y_tests = np.empty(shape=(0))
         y_probabilities = np.empty(shape=(0,12))
+
+        #Start iterating over the stratified Kfold splits. 
         for train_index, test_index in skf.split(df, training_labels):
+            #Extract selected samples for training and testing. 
             X_train, X_test = df.iloc[train_index], df.iloc[test_index]
             y_train, y_test = training_labels.iloc[train_index], training_labels.iloc[test_index]
+            #Train the model
             classifier.fit(X_train, y_train)
+            #Predict the values on test 
             prediction=classifier.predict(X_test)
+            #Start Extracting the values form the classifier. 
             predicted_values = np.append(predicted_values, prediction)
             ground_values = np.append(ground_values, y_test)
             y_tests = np.append(y_tests, y_test, axis=0)
@@ -149,25 +177,40 @@ def classification(classifier, data_frames) -> tuple[dict, dict, dict, dict, dic
             accuracies.append(accuracy_score(y_test, prediction, sample_weight=None, normalize=True))
             precisions.append(precision_score(y_test, prediction, sample_weight=None, average='micro'))
             recalls.append(recall_score(y_test, prediction, sample_weight=None, average='micro'))
-            f1s.append(f1_score(y_test, prediction, sample_weight=None, average='micro'))  
+            f1s.append(f1_score(y_test, prediction, sample_weight=None, average='micro'))
+
+        # Store the values from the stratified k fold runs into the dictionary for the number of features. 
         cm_dict[num_features] = confusion_matrix(ground_values, predicted_values)
         accuracy_dict[num_features] = np.mean(accuracies)
         precision_dict[num_features] =  np.mean(precisions)
         recall_dict[num_features] = np.mean(recalls)
         f1_dict[num_features] = np.mean(f1s)
         roc_values[num_features] = (y_tests, y_probabilities)
+
+    #Return the values in tuple format 
     return (accuracy_dict, precision_dict, recall_dict, f1_dict, cm_dict, roc_values)
 
 
 def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict], model_name: str, classifier_name: str ):
+    """
+        This function takes care of creating the plots for the data geathered in the classification step. 
+        The data in the passed tuple is in the mapping of num_features -> data structure containing values (typically list or numpy arrays)
+        @param: classification_data: tuple[dict, dict, dict, dict, dict, dict], contains dictionaries for accuracy, precision, recall, f1, confusion matrix, and roc
+        @param: model_name: string,  Model which was used to extract the features from the full dataset. 
+        @classifier_name: string, Classifier model used to classify the features. 
+    """
+
+    # Extract values from the classification data tuple object. 
     accuracy_dict, precision_dict, recall_dict, f1_dict, cm_dict, roc_values_dict = classification_data
 
+    #Deine the sections which can be represented together 
     sections = {
         "Accuracy" : accuracy_dict,
         "Precision" : precision_dict,
         "Recall" : recall_dict,
         "F1": f1_dict
     }
+    #Create the plots and start plotting the sections. 
     fig, plots = plt.subplots(2,2) 
     plotx = 0
     ploty = 0
@@ -181,6 +224,8 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
         plotx += 1 
     plt.show()
 
+    # Confision Matrix needs to have its own plot, as we have a confusion matrix per each number of features. 
+    # This section takes care of plotting each confusion matrix for the features. 
     fig, plots = plt.subplots(2, (len(cm_dict)//2) + 1)
     plotx = 0
     ploty = 0
@@ -194,6 +239,7 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
         plotx +=1 
     plt.show()
 
+    # Like confusion matrix, ROC curves are drawn per number of features and thus must be plotted seperatly. 
     fig, plots = plt.subplots(2, (len(roc_values_dict)//2) + 1)
     plotx = 0
     ploty = 0
@@ -204,24 +250,13 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
         skplt.metrics.plot_roc(y_test, y_proba, title=f'ROC ({model_name}) {classifier_name} with {num_features} Features', ax=plots[plotx, ploty] )
         plotx +=1 
     plt.show()
-    # accuracy_x, accuracy_y = zip(*(accuracy_dict.items()))
-    # plt.plot(accuracy_x, accuracy_y)
-    # plt.xlabel("Number of Features")
-    # plt.ylabel("Mean Accuracy")
-    # plt.title(f'Mean Accuracy for {model_name} using {classifier_name} V.S Number of Features')
-    # plt.show()
 
-    # presicion_x, precision_y = zip(*(precision_dict.items()))
-    # plt.plot(presicion_x, precision_y)
-    # plt.title(f"Mean Precision for {model_name} using {classifier_name} V.S Number of Features")
-    # plt.xlabel('Number of Features')
-    # plt.ylabel(f'Mean Precision')
-    # plt.show()
 
 classifiers = [KNeighborsClassifier(n_neighbors=5), svm(kernel='linear', probability=True), ran_forest(n_estimators=100)]
 data_frames = [sfm_dataframes, lasso_dataframes, rfe_dataframes]
 
 if __name__ == '__main__':
+    tsne()
     for classifier in classifiers:
         classification_output_sfm = classification(classifier, sfm_dataframes)
         plot_section(classification_output_sfm, "SFM", classifier.__class__.__name__)
