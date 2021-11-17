@@ -1,4 +1,5 @@
 import json
+from types import ModuleType
 
 from seaborn.palettes import color_palette
 import data as d
@@ -9,17 +10,17 @@ import numpy as np
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import cross_val_score
 from sklearn.svm  import SVC as svm 
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from sklearn.ensemble import RandomForestClassifier as ran_forest
-
+import scikitplot as skplt
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 training_features, training_labels = d.get_training_split()
 testing_features, testing_labels = d.get_test_split()
@@ -119,10 +120,10 @@ def tsne():
         counter += 1
     plt.show()
 
-def classification(classifier, data_frames) -> dict:
-    classifier = classifier
+def classification(classifier, data_frames, df_name) -> dict:
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)
     scores = dict()
+    print(f"Begin Classification for {classifier.__class__.__name__} with Dataframes from {df_name}")
     for num_features, df in data_frames.items(): 
         scores[num_features] = []
         accuracies = []
@@ -132,38 +133,31 @@ def classification(classifier, data_frames) -> dict:
         predicted_values = []
         ground_values = []
         probability_values = []
+        y_tests = np.empty(shape=(0))
+        y_probabilities = np.empty(shape=(0,12))
         for train_index, test_index in skf.split(df, training_labels):
             X_train, X_test = df.iloc[train_index], df.iloc[test_index]
             y_train, y_test = training_labels.iloc[train_index], training_labels.iloc[test_index]
             classifier.fit(X_train, y_train)
             prediction=classifier.predict(X_test)
-            #predicted_values.append(prediction)
-            #ground_values.append(ground_values, y_test)\
             predicted_values = np.append(predicted_values, prediction)
             ground_values = np.append(ground_values, y_test)
+            y_tests = np.append(y_tests, y_test, axis=0)
             probability = classifier.predict_proba(X_test)
+            y_probabilities = np.append(y_probabilities, probability, axis=0)
             probability_values = np.append(probability_values, probability)
             accuracies.append(accuracy_score(y_test, prediction, sample_weight=None, normalize=True))
             precisions.append(precision_score(y_test, prediction, sample_weight=None, average='micro'))
             recalls.append(recall_score(y_test, prediction, sample_weight=None, average='micro'))
             f1s.append(f1_score(y_test, prediction, sample_weight=None, average='micro'))  
         cm = confusion_matrix(ground_values, predicted_values)
+        skplt.metrics.plot_roc(y_tests, y_probabilities, title=f'{classifier.__class__.__name__} with {num_features} features (from {df_name})')
+        plt.show()
         mean_accuracy = np.mean(accuracies)
         mean_precision = np.mean(precisions)
         mean_recall = np.mean(recalls)
         mean_f1 = np.mean(f1s)
-        #fpr, tpr, _ = roc_curve(ground_values, predicted_values)
-        #auc = roc_auc_score(ground_values, predicted_values)
-        print(f'Mean Acc: {mean_accuracy}, Mean Prec: {mean_precision}, Mean Rec: {mean_precision}, Mean F1: {mean_f1}')
-        print(f'Confussion Matrix: \n {cm}')
-        #pyplot.plot(fpr, tpr, linestyle='--')
-        #pyplot.xlabel('False Positive Rate')
-        #pyplot.ylabel('True Positive Rate')
-        #pyplot.legend()
-        #pyplot.show()
-        # scores[num_features].append(classifier.score(X_test, y_test))
-        # classifier.fit(df, training_labels)
-        # print(f'SFM {num_features} features accuracy: {cross_val_score(classifier, testing_features, testing_labels, cv=5).mean()}')
+        print(f'Num of Features: {num_features},\nMean Accuracy: {mean_accuracy},\nMean Precision: {mean_precision},\nMean Recall: {mean_recall},\nMean F1: {mean_f1}')
     return scores
 
 
@@ -173,9 +167,9 @@ data_frames = [sfm_dataframes, lasso_dataframes, rfe_dataframes]
 if __name__ == '__main__':
     scores = dict()
     for classifier in classifiers:
-        scores[classifier.__class__.__name__] = [("SFM", classification(classifier, sfm_dataframes))]
-        scores[classifier.__class__.__name__].append(["LASSO",classification(classifier, lasso_dataframes)])
-        scores[classifier.__class__.__name__].append(["RFE", classification(classifier, rfe_dataframes)])
+        scores[classifier.__class__.__name__] = [("SFM", classification(classifier, sfm_dataframes, "SFM"))]
+        scores[classifier.__class__.__name__].append(["LASSO",classification(classifier, lasso_dataframes, "LASSO")])
+        scores[classifier.__class__.__name__].append(["RFE", classification(classifier, rfe_dataframes, "RFE")])
     #print(scores)
 
     """
