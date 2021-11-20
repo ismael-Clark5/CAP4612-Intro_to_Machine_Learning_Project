@@ -48,7 +48,7 @@ def tsne():
     """
     fig, plots = plt.subplots(2,3)
     df, labels = d.get_training_split()
-    tsne = TSNE(n_components=3, verbose=0)
+    tsne = TSNE(n_components=2, verbose=0)
     plotx = 0
     ploty = 0
     for numfeatures, df in sfm_dataframes.items():
@@ -56,7 +56,7 @@ def tsne():
             plotx += 1
             ploty = 0
         df_t = tsne.fit_transform(df)
-        tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2', 'tSNE3'])
+        tsne_for_seaborn = pd.DataFrame(data=df_t, columns=['tSNE1','tSNE2'])
         plots[plotx, ploty].set_title(f'SFM t-SNE with {numfeatures}')
         sns.scatterplot(
             x="tSNE1",y="tSNE2",
@@ -226,7 +226,7 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
 
     # Confision Matrix needs to have its own plot, as we have a confusion matrix per each number of features. 
     # This section takes care of plotting each confusion matrix for the features. 
-    fig, plots = plt.subplots(2, (len(cm_dict)//2) + 1)
+    fig, plots = plt.subplots(2, ((len(cm_dict)//2)) if model_name == "LASSO" else (len(cm_dict)//2) + 1)
     plotx = 0
     ploty = 0
     for num_features, confusion_matrix in cm_dict.items():
@@ -240,7 +240,7 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
     plt.show()
 
     # Like confusion matrix, ROC curves are drawn per number of features and thus must be plotted seperatly. 
-    fig, plots = plt.subplots(2, (len(roc_values_dict)//2) + 1)
+    fig, plots = plt.subplots(2, ((len(roc_values_dict)//2)) if model_name == "LASSO" else (len(roc_values_dict)//2) + 1)
     plotx = 0
     ploty = 0
     for num_features, (y_test, y_proba) in roc_values_dict.items():
