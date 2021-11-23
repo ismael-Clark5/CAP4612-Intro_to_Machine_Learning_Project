@@ -11,8 +11,37 @@
 </div>
 <div style="page-break-after: always;"></div>
 
+<h1> Table of Contents <h1>
+
+- [Abstract](#abstract)
+- [Introduction](#introduction)
+- [Feature Selection Models](#feature-selection-models)
+  - [LASSO](#lasso)
+  - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe)
+  - [SelectFromModel (SFM)](#selectfrommodel-sfm)
+- [Classifiers](#classifiers)
+  - [K-Nearest Neighbors (KNN)](#k-nearest-neighbors-knn)
+  - [Support Vector Machine (SVM)](#support-vector-machine-svm)
+  - [Random Forest (RF)](#random-forest-rf)
+- [Results and Evaluation](#results-and-evaluation)
+  - [Lasso](#lasso-1)
+    - [t-SNE](#t-sne)
+    - [Performance Matrics](#performance-matrics)
+    - [Confusion Matrix](#confusion-matrix)
+    - [ROC Curves](#roc-curves)
+  - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe-1)
+    - [t-SNE](#t-sne-1)
+    - [Performance Metrics](#performance-metrics)
+    - [Confusion Matrix](#confusion-matrix-1)
+    - [ROC Curves](#roc-curves-1)
+  - [SelectFromModel](#selectfrommodel)
+    - [Pr](#pr)
+- [Conclusion](#conclusion)
+- [References](#references)
+
+
 # Abstract
-This paper covers the use of several supervised learning algorithms in a  feature selection task on a dataset. This dataset contains normalized long non-coding RNA (lncRNA) expression profiles of 12 cancer types. Each algorithm yields a set of features which are then used by three different classifiers. To check the performance of the classification (for each set of features), the results are evaluated using different performance metrics. 
+This paper covers the use of several supervised learning aSlgorithms in a  feature selection task on a dataset. This dataset contains normalized long non-coding RNA (lncRNA) expression profiles of 12 cancer types. Each algorithm yields a set of features which are then used by three different classifiers. To check the performance of the classification (for each set of features), the results are evaluated using different performance metrics. 
 
 <div style="page-break-after: always;"></div>
 
@@ -183,6 +212,8 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 <img src='./images/RFE-RF-ROC-Curves.png' />
 
 ## SelectFromModel 
+
+### Pr
 
 # Conclusion
 
