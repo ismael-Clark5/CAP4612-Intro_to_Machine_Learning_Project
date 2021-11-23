@@ -312,7 +312,6 @@ if __name__ == '__main__':
         plot_section(classification_output_lasso, "LASSO", classifier.__class__.__name__)
         classification_output_rfe = classification(classifier, rfe_dataframes)
         plot_section(classification_output_rfe, "RFE", classifier.__class__.__name__)
-    #print(scores)
 
     """
     confusion matrix, mean accuracy, mean precision, mean recall, mean f1 
