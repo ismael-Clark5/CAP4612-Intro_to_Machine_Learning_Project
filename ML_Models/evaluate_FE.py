@@ -190,7 +190,6 @@ def classification(classifier, data_frames) -> tuple[dict, dict, dict, dict, dic
     #Return the values in tuple format 
     return (accuracy_dict, precision_dict, recall_dict, f1_dict, cm_dict, roc_values)
 
-
 def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict], model_name: str, classifier_name: str ):
     """
         This function takes care of creating the plots for the data geathered in the classification step. 
@@ -226,21 +225,25 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
 
     # Confision Matrix needs to have its own plot, as we have a confusion matrix per each number of features. 
     # This section takes care of plotting each confusion matrix for the features. 
-    fig, plots = plt.subplots(2, ((len(cm_dict)//2)) if model_name == "LASSO" else (len(cm_dict)//2) + 1)
+    fig, plots = plt.subplots(2, (len(cm_dict)//2) + 1)
     plotx = 0
     ploty = 0
-    for num_features, confusion_matrix in cm_dict.items():
-        if plotx == 2:
-            plotx = 0
-            ploty += 1
-        #sns.heatmap(confusion_matrix, annot=True, ax=plots[plotx, ploty], robust=True)
-        plots[plotx, ploty].matshow(confusion_matrix, cmap='binary')
-        plots[plotx, ploty].set_title(f"CM ({model_name}) for {classifier_name} with {num_features} Features")
-        plotx +=1 
-    plt.show()
+    if( model_name == "LASSO"):
+        plot_lasso(classification_data, classifier_name)
+        return
+    else:
+        for num_features, confusion_matrix in cm_dict.items():
+            if plotx == 2:
+                plotx = 0
+                ploty += 1
+            #sns.heatmap(confusion_matrix, annot=True, ax=plots[plotx, ploty], robust=True)
+            plots[plotx, ploty].matshow(confusion_matrix, cmap='binary')
+            plots[plotx, ploty].set_title(f"CM ({model_name}) for {classifier_name} with {num_features} Features")
+            plotx +=1 
+        plt.show()
 
     # Like confusion matrix, ROC curves are drawn per number of features and thus must be plotted seperatly. 
-    fig, plots = plt.subplots(2, ((len(roc_values_dict)//2)) if model_name == "LASSO" else (len(roc_values_dict)//2) + 1)
+    fig, plots = plt.subplots(2, (len(roc_values_dict)//2) + 1)
     plotx = 0
     ploty = 0
     for num_features, (y_test, y_proba) in roc_values_dict.items():
@@ -251,6 +254,51 @@ def plot_section(classification_data: tuple[dict, dict, dict, dict, dict, dict],
         plotx +=1 
     plt.show()
 
+
+def plot_lasso(classification_data: tuple[dict, dict, dict, dict, dict, dict] , classifier_name: str):
+    """
+    Due to how lasso has many, many features to plot, it is easier to have them be plotted seperetly
+    where the number of plots is designs specifically for LASSO.
+    @param: cm_dict: Dictionary containing a mapping of int-> dict, where int is the number of features and dict is the values used to create the confusion matrix for tha many features
+    @param: roc_dict: Dictionary containing mappig of int-> tuple[y_test, y_proba], where in the the number of features and tuple containts the set of values required to create an ROC curve for that number fo features
+    @param: classifier_name: String containg the classifier class used to test the feautures 
+    """
+    _, __, ___, ___, cm_dict, roc_values_dict = classification_data
+
+    fig, plot = plt.subplots(2,2)
+    plotx = 0
+    ploty = 0
+    for num_features, confusion_matrix in cm_dict.items():
+        if plotx == 2 and ploty == 1:
+            fig, plot = plt.subplots(2,2)
+            plotx = 0
+            ploty = 0
+        if plotx == 2:
+            ploty += 1
+            plotx = 0
+        plot[plotx, ploty].matshow(confusion_matrix, cmap="binary")
+        plot[plotx, ploty].set_title(f"CM LASSO for {classifier_name} with {num_features} Features")
+        plotx+=1
+    plt.show()
+
+    fig, plot = plt.subplots(2,2)
+    plotx = 0
+    ploty = 0
+    for num_features in roc_values_dict.keys():
+        y_test, y_proba = roc_values_dict[num_features]
+        if plotx == 2 and ploty == 1:
+            fig, plot = plt.subplots(2,2)
+            plotx = 0
+            ploty = 0
+        if plotx == 2:
+            ploty += 1
+            plotx = 0
+        skplt.metrics.plot_roc(y_test, y_proba, title=f'ROC (LASSO) {classifier_name} with {num_features} Features', ax=plot[plotx, ploty] )
+        plotx+=1
+    plt.show()
+        
+
+    
 
 classifiers = [KNeighborsClassifier(n_neighbors=5), svm(kernel='linear', probability=True), ran_forest(n_estimators=100)]
 data_frames = [sfm_dataframes, lasso_dataframes, rfe_dataframes]
