@@ -53,11 +53,11 @@ For its implementation, LASSO’s cost function is defined as:
   {1 \over 2N_{training} } {\sum ^{N_{training}} _{i=1} (y_{real} ^{i} - y_{predict} ^i)} = \alpha {\sum _{j=1} ^{n} | \alpha _{j} |}
 $$ --> 
 
-<div align="center"><img style="background: white;" src="svg/CuraKlP9yk.svg"></div>
+<div align="center"><img src="svg/CuraKlP9yk.svg"></div>
 
 where $\alpha _{j}$ is the coefficient of the j-th feature. The final term is called l1 penalty and α is a hyperparameter that tunes the intensity of this penalty term. The higher the coefficient of a feature, the higher the value of the cost function. This model seeks to optimize the cost function reducing the value of the coefficient. The values must be scaled to achieve meaningful results. 
 
-While implementing the model, using the LassoCV library from the sklearn.linear_model package. Also,  <!-- $a_i=i-1+0.1$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/n7rvM00GHn.svg"> | <!-- $0=0.01\space and\space i \in [0,10)$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/ID7bLmmnR1.svg">. Each one of these values of alpha yielded a set of features which were stored for later analysis.
+While implementing the model, using the LassoCV library from the sklearn.linear_model package. Also,  <!-- $a_i=i-1+0.1$ --> <img src="svg/n7rvM00GHn.svg"> | <!-- $0=0.01\space and\space i \in [0,10)$ --> <img  src="svg/ID7bLmmnR1.svg">. Each one of these values of alpha yielded a set of features which were stored for later analysis.
 
 ## Recursive Feature Elimination (RFE)
 
@@ -65,16 +65,16 @@ Recursive feature elimination is a feature selection algorithm that selects feat
 
 For its implementation, the RFE class  was used, taken from the sklearn.feature_selection package. Logistic Regression was used as the estimator,  as required by the class. An estimator is the model whose performance will be evaluated for a set of features returned from the algorithm. 
 
-As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/zoYo6oVbqz.svg">  by the algorithm in each iteration is defined as 
-
-<!-- $n_i=n_{i-1}$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/0CBI9wtYAp.svg">|<!-- $n_0=20$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/NAK0HMNjd7.svg"> and <!-- $i\epsilon[0,5)$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/3VUhepUYee.svg">
+As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img src="svg/zoYo6oVbqz.svg">  by the algorithm in each iteration is defined as 
+<p>
+<!-- $n_i=n_{i-1}$ --> <img src="svg/0CBI9wtYAp.svg">|<!-- $n_0=20$ --> <img src="svg/NAK0HMNjd7.svg"> and <!-- $i\epsilon[0,5)$ --> <img src="svg/3VUhepUYee.svg"> </p>
 
 ## SelectFromModel (SFM)
 SelectFromModel is a python class that acts as a meta converter that selects features based on importance weights. The post-fit evaluator must have feature_importances_ or coef_ attributes. [Sources: 3, 9]. Once set up, the method needs to be adapted for the training set and with the get_support attribute the  importance of features can be controlled.
 Like the RFE, SelectFromModel from Scikit-Learn is based on a Machine Learning Model estimation for selecting the features. The differences are that SelectFromModel feature selection is based on the importance attribute (often is coef_ or feature_importances_ but it could be any callable) threshold. By default, the threshold is the mean.
-As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/UyTcryxF27.svg">  by the algorithm in each iteration is defined as
-
- <!-- $n_i=n_{i -1}$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/IhiBA4saXC.svg"> | <!-- $n_0=20$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/BldswAeciU.svg"> and <!-- $i\epsilon[0,5)$ --> <img style="transform: translateY(0.1em); background: white;" src="svg/NC9Y4jXTFt.svg">
+As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img src="svg/UyTcryxF27.svg">  by the algorithm in each iteration is defined as
+<p>
+ <!-- $n_i=n_{i -1}$ --> <img src="svg/IhiBA4saXC.svg"> | <!-- $n_0=20$ --> <img src="svg/BldswAeciU.svg"> and <!-- $i\epsilon[0,5)$ --> <img src="svg/NC9Y4jXTFt.svg"> </p>
 
 # Classifiers 
 ## K-Nearest Neighbors (KNN)
