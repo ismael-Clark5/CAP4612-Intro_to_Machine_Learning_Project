@@ -173,6 +173,14 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 <img src='./images/RFE-RF-Confusion-Matrix.png' />
 
+### ROC Curves 
+
+<img src='./images/RFE-KNN-ROC-Curves.png' />
+
+<img src='./images/RFE-SVM-ROC-Curves.png' />
+
+<img src='./images/RFE-RF-ROC-Curves.png' />
+
 ## SelectFromModel 
 
 # Conclusion
