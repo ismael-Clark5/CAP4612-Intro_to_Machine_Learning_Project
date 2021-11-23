@@ -97,62 +97,59 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 # Results and Evaluation
 ## Lasso
 ### t-SNE
-<img src='images/LASSO TSNE 1.png'/>
+<img src='./images/LASSO TSNE 1.png'/>
 
-<img src='images/LASSO TSNE 2.png'/>
+<img src='./images/LASSO TSNE 2.png'/>
 
-<img src='images/LASSO TSNE 3.png'/>
+<img src='./images/LASSO TSNE 3.png'/>
 
 ### Performance Matrics 
 
-<img src='images/LASSO-KNN-Performance-Metrics.png'/>
+<img src='./images/LASSO-KNN-Performance-Metrics.png'/>
 
-<img src='images/LASSO-SVM-Performance-Metrics.png'/>
+<img src='./images/LASSO-SVM-Performance-Metrics.png'/>
 
-<img src='images/LASSO-RF-Performance-Metrics.png'/>
+<img src='./images/LASSO-RF-Performance-Metrics.png'/>
 
 ### Confusion Matrix
 
-<img src='images/LASSO-KNN-Confusion-Matrix-1.png'/> 
+<img src='./images/LASSO-KNN-Confusion-Matrix-1.png'/> 
 
-<img src='images/LASSO-KNN-Confusion-Matrix-2.png'/> 
+<img src='./images/LASSO-KNN-Confusion-Matrix-2.png'/> 
 
-<img src='images/LASSO-KNN-Confusion-Matrix-3.png'/> 
+<img src='./images/LASSO-KNN-Confusion-Matrix-3.png'/> 
 
-<img src='images/LASSO-SVM-Confusion-Matrix-1.png'/> 
+<img src='./images/LASSO-SVM-Confusion-Matrix-1.png'/> 
 
-<img src='images/LASSO-SVM-Confusion-Matrix-2.png'/>
+<img src='./images/LASSO-SVM-Confusion-Matrix-2.png'/>
 
-<img src='images/LASSO-SVM-Confusion-Matrix-3.png'/> 
+<img src='./images/LASSO-SVM-Confusion-Matrix-3.png'/> 
 
-<img src='images/LASSO-RF-Confusion-Matrix-1.png'/> 
+<img src='./images/LASSO-RF-Confusion-Matrix-1.png'/> 
 
-<img src='images/LASSO-RF-Confusion-Matrix-2.png'/> 
+<img src='./images/LASSO-RF-Confusion-Matrix-2.png'/> 
 
-<img src='images/LASSO-RF-Confusion-Matrix-3.png'/> 
+<img src='./images/LASSO-RF-Confusion-Matrix-3.png'/> 
 
 ### ROC Curves 
 
-<img src='images/LASSO-KNN-ROC-1.png'/>
+<img src='./images/LASSO-KNN-ROC-1.png'/>
 
-<img src='images/LASSO-KNN-ROC-2.png'/>
+<img src='./images/LASSO-KNN-ROC-2.png'/>
 
-<img src='images/LASSO-KNN-ROC-3.png'/>
+<img src='./images/LASSO-KNN-ROC-3.png'/>
 
-<img src='images/LASSO-SVM-ROC-1.png'/>
+<img src='./images/LASSO-SVM-ROC-1.png'/>
 
-<img src='images/LASSO-SVM-ROC-2.png'/>
+<img src='./images/LASSO-SVM-ROC-2.png'/>
 
-<img src='images/LASSO-SVM-ROC-3.png'/>
+<img src='./images/LASSO-SVM-ROC-3.png'/>
 
-<img src='images/LASSO-RF-ROC-1.png'/>
+<img src='./images/LASSO-RF-ROC-1.png'/>
 
-<img src='images/LASSO-RF-ROC-2.png'/>
+<img src='./images/LASSO-RF-ROC-2.png'/>
 
-<img src='images/LASSO-RF-ROC-3.png'/>
-
-
-
+<img src='./images/LASSO-RF-ROC-3.png'/>
 
 
 ## Recursive Feature Elimination (RFE)
