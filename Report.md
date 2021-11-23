@@ -1,4 +1,4 @@
-<div style="center">
+<center>
 <h1> Feature Selection Using LASSO, Recursive Feature Elimination, and SelectFromModel </h1>
 
  <p2> Ismael Clark Antonela Radas Hector Ramirez
@@ -8,7 +8,8 @@
  Florida International University
  </p2>
 
-</div>
+</center>
+
 <div style="page-break-after: always;"></div>
 
 ______________________________________________
@@ -16,6 +17,7 @@ ______________________________________________
 <h4>Table of Contents<h4>
 
 ______________________________________________
+
 - [Abstract](#abstract)
 - [Introduction](#introduction)
 - [Feature Selection Models](#feature-selection-models)
