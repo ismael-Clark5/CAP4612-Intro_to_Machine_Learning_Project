@@ -13,7 +13,7 @@
 
 ______________________________________________
 
-<h3>Table of Contents<h3>
+<h4>Table of Contents<h4>
 
 ______________________________________________
 - [Abstract](#abstract)
@@ -314,6 +314,8 @@ The confusion matrix with KNN shows as the number of features increase there is 
 #### Support Vector Machine 
 
 <img src="./images/RFE-SVM-Confusion-Matrix.png" />
+
+SVM validates the results from KNN, where as the number of features selected increase, the overall diversion decre 
 
 #### Random Forest
 
