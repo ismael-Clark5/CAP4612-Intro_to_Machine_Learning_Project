@@ -1,11 +1,13 @@
 <center>
 <h1> Feature Selection Using LASSO, Recursive Feature Elimination, and SelectFromModel </h1>
 
- <p2> Ismael Clark Antonela Radas Hector Ramirez
+ <p2>
+ Ismael Clark, Antonela Radas, Hector Ramirez
 
  CAP4612-Introduction to Machine Learning
 
  Florida International University
+
  </p2>
 
 </center>
@@ -14,7 +16,7 @@
 
 ______________________________________________
 
-<h4>Table of Contents<h4>
+<p2>Table of Contents<p2>
 
 ______________________________________________
 
@@ -120,7 +122,7 @@ $$ -->
 
 <div align="center"><img src="svg/CuraKlP9yk.svg"></div>
 
-where $\alpha _{j}$ is the coefficient of the j-th feature. The final term is called l1 penalty and α is a hyperparameter that tunes the intensity of this penalty term. The higher the coefficient of a feature, the higher the value of the cost function. This model seeks to optimize the cost function reducing the value of the coefficient. The values must be scaled to achieve meaningful results. 
+where <!-- $\alpha _{j}$ --> <img src="svg/BbPDAnAX6S.svg"> is the coefficient of the j-th feature. The final term is called l1 penalty and α is a hyperparameter that tunes the intensity of this penalty term. The higher the coefficient of a feature, the higher the value of the cost function. This model seeks to optimize the cost function reducing the value of the coefficient. The values must be scaled to achieve meaningful results. 
 
 While implementing the model, using the LassoCV library from the sklearn.linear_model package. Also,  <!-- $a_i=i-1+0.1$ --> <img src="svg/n7rvM00GHn.svg"> | <!-- $0=0.01\space and\space i \in [0,10)$ --> <img  src="svg/ID7bLmmnR1.svg">. Each one of these values of alpha yielded a set of features which were stored for later analysis.
 
@@ -137,7 +139,8 @@ As specified in the project instructions, the number of feature to select <!-- $
 ## SelectFromModel (SFM)
 SelectFromModel is a python class that acts as a meta converter that selects features based on importance weights. The post-fit evaluator must have feature_importances_ or coef_ attributes. [Sources: 3, 9]. Once set up, the method needs to be adapted for the training set and with the get_support attribute the  importance of features can be controlled.
 Like the RFE, SelectFromModel from Scikit-Learn is based on a Machine Learning Model estimation for selecting the features. The differences are that SelectFromModel feature selection is based on the importance attribute (often is coef_ or feature_importances_ but it could be any callable) threshold. By default, the threshold is the mean.
-As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img src="svg/UyTcryxF27.svg">  by the algorithm in each iteration is defined as
+As specified in the project instructions, the number of feature to select <!-- $(n)$ --> <img src="svg/UyTcryxF27.svg"> by the algorithm in each iteration is defined as
+
 <p>
  <!-- $n_i=n_{i -1}$ --> <img src="svg/IhiBA4saXC.svg"> | <!-- $n_0=20$ --> <img src="svg/BldswAeciU.svg"> and <!-- $i\epsilon[0,5)$ --> <img src="svg/NC9Y4jXTFt.svg"> </p>
 
@@ -159,6 +162,8 @@ They can also make predictions with high accuracy, stability, and easy interpret
        
 To facilitate the systematic and standardized refinement of somatic variants based on cancer sequencing data, random forest (RF) models and a deep learning (DL) approach have been used to demonstrate that these machine learning methods can provide classification efficiency. The classes are high and the same in all refinements of the variants (Ainscough et al., 2018). A machine learning approach called Cerebro improved the accuracy of invoking verified somatic mutations in tumor samples and outperformed many other methods for detecting somatic mutations (Wood et al., 2018). The potential for CNNs to use crude nucleotide sequences to classify cancer mutations was initially explored by using tag coding, hot coding, and embedding to preprocess DNA information. 
 
+<div style="page-break-after: always;"></div>
+
 # Results and Evaluation
 
 ## Lasso
@@ -177,6 +182,8 @@ This image shows selected features from 21 through 12. Compared the higher numbe
 
 Lastly, this image shows lasso with 11 and 9 features selected. In this images the classes are even more chaotic with less clustering. 
 
+
+<div style="page-break-after: always;"></div>
 
 ### Performance Matrics 
 
@@ -199,8 +206,9 @@ When running the same features through SVM we can see that just like KNN, SVM sh
 
 This image confirms the results from KNN and SVM, as the accuracy, recall, precision, and f1 scores are at 94% while number of features is above the 100, with a steep decline when they are bellow 100 features. 
 
-### Confusion Matrix
+<div style="page-break-after: always;"></div>
 
+### Confusion Matrix
 
 #### K-Nearest-Neighbor
 
@@ -216,6 +224,8 @@ As the number of features start to fall bellow 100, we can start to see that the
 
 Lastly, with very few number of features, we can see that the confusion matrix has an increased instance of diviation, in particular with 9 features, which shows very high veriation and mislassification.
 
+<div style="page-break-after: always;"></div>
+
 #### Support Vector Machine
 
 <img src='./images/LASSO-SVM-Confusion-Matrix-1.png'/> 
@@ -230,6 +240,7 @@ This image has features between 21 and 12, this also a higher degree of divergan
 
 This image shows the confusion matrix with 11 and 9 features, both showed a higher degree of divergance from the diagonal and higher instances of misclassification. 
 
+<div style="page-break-after: always;"></div>
 
 #### Random Forest
 
@@ -243,6 +254,8 @@ THis image just in like KNN and SVM shows Lasso with less the 100 features, and 
 
 <img src='./images/LASSO-RF-Confusion-Matrix-3.png'/> 
 
+<div style="page-break-after: always;"></div>
+
 ### ROC Curves 
 
 #### K-Nearest-Neighbor
@@ -255,6 +268,8 @@ THis image just in like KNN and SVM shows Lasso with less the 100 features, and 
 
 All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
 
+<div style="page-break-after: always;"></div>
+
 #### Support Vector Machine 
 
 <img src='./images/LASSO-SVM-ROC-1.png'/>
@@ -265,6 +280,7 @@ All this images show how the over TPR rapidly increases when the the number of f
 
 All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
 
+<div style="page-break-after: always;"></div>
 
 #### Random Forest
 
@@ -276,6 +292,7 @@ All this images show how the over TPR rapidly increases when the the number of f
 
 All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
 
+<div style="page-break-after: always;"></div>
 
 ## Recursive Feature Elimination (RFE)
 
@@ -284,6 +301,8 @@ All this images show how the over TPR rapidly increases when the the number of f
 <img src='./images/RFE TSNE.png'>
 
 This figure is a really good example of how the clustering improves as the number of features increases. We can see a clear progression from iregular, choatic clustering to more organized grouped clusters. 
+
+<div style="page-break-after: always;"></div>
 
 ### Performance Metrics 
 
@@ -323,6 +342,8 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src='./images/RFE-RF-Confusion-Matrix.png' />
 
+<div style="page-break-after: always;"></div>
+
 ### ROC Curves 
 
 #### K-Nearest-Neighbor
@@ -333,9 +354,15 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src='./images/RFE-SVM-ROC-Curves.png' />
 
+<div style="page-break-after: always;"></div>
+
+
 #### Random Forest
 
 <img src='./images/RFE-RF-ROC-Curves.png' />
+
+<div style="page-break-after: always;"></div>
+
 
 ## SelectFromModel 
 
@@ -343,19 +370,31 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src="./images/SFM%20TSNE.png" />
 
+<div style="page-break-after: always;"></div>
+
+
 ### Performance Metrics 
 
 #### K-Nearest-Neighbor
 
 <img src="./images/SFM-KNN-Performance-Metrics.png"/>
 
+<div style="page-break-after: always;"></div>
+
+
 #### Support Vector Machine
 
 <img src="./images/SFM-SVM-Performance-Metrics.png">
 
+<div style="page-break-after: always;"></div>
+
+
 #### Random Forest
 
 <img src="./images/SFM-RF-Performance-Metrics.png">
+
+<div style="page-break-after: always;"></div>
+
 
 ### Confusion Matrix 
 
@@ -363,13 +402,22 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src="./images/SFM-KNN-Confusion-Matrix.png">
 
+<div style="page-break-after: always;"></div>
+
+
 #### Support Vector Machine
 
 <img src="./images/SFM-SVM-Confusion-Matrix.png">
 
+<div style="page-break-after: always;"></div>
+
+
 #### Random Forest 
 
 <img src="./images/SFM-RF-Confusion-Matrix.png">
+
+<div style="page-break-after: always;"></div>
+
 
 ### ROC Curves 
 
@@ -377,13 +425,21 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src="./images/SFM-KNN-ROC-Curves.png">
 
+<div style="page-break-after: always;"></div>
+
+
 #### Suppport Vector Machine 
 
 <img src="./images/SFM-SVM-ROC-Curves.png">
 
+<div style="page-break-after: always;"></div>
+
 #### Random Forest 
 
 <img src="./images/SFM-RF-ROC-Curves.png">
+
+<div style="page-break-after: always;"></div>
+
 
 # Conclusion
 
