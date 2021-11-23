@@ -158,13 +158,23 @@ They can also make predictions with high accuracy, stability, and easy interpret
 To facilitate the systematic and standardized refinement of somatic variants based on cancer sequencing data, random forest (RF) models and a deep learning (DL) approach have been used to demonstrate that these machine learning methods can provide classification efficiency. The classes are high and the same in all refinements of the variants (Ainscough et al., 2018). A machine learning approach called Cerebro improved the accuracy of invoking verified somatic mutations in tumor samples and outperformed many other methods for detecting somatic mutations (Wood et al., 2018). The potential for CNNs to use crude nucleotide sequences to classify cancer mutations was initially explored by using tag coding, hot coding, and embedding to preprocess DNA information. 
 
 # Results and Evaluation
+
 ## Lasso
+
 ### t-SNE
+
 <img src='./images/LASSO TSNE 1.png'/>
+
+This image contains the tsne when lasso has selected 512 through 29 features. With 512 features we can see some real clear clustering and even with as low as 68 features classes seem to be very distinct. 
 
 <img src='./images/LASSO TSNE 2.png'/>
 
+This image shows selected features from 21 through 12. Compared the higher number of features there is a clear disorganization in the classes as the plotting becomes more chaotic. 
+
 <img src='./images/LASSO TSNE 3.png'/>
+
+Lastly, this image shows lasso with 11 and 9 features selected. In this images the classes are even more chaotic with less clustering. 
+
 
 ### Performance Matrics 
 
@@ -173,13 +183,19 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 <img src='./images/LASSO-KNN-Performance-Metrics.png'/>
 
+When running KNN on the data set with the LASSO selected feature, we can see that with high number of feature selection overall accuracy, precision, recall and f1 are around 94%, with a rapid decline when the number of features falls bellow 100. 
+
 #### Support Vector Machine
 
 <img src='./images/LASSO-SVM-Performance-Metrics.png'/>
 
+When running the same features through SVM we can see that just like KNN, SVM shows very high accuracy, precision, recall, and f1, with a sharap and rapid decline with the number of features fall bellow 100, this seems to indicate that optimal number of features is somewhere around the 100 features mark, with smaller gains as number of features increase. 
+
 #### Random Forest
 
 <img src='./images/LASSO-RF-Performance-Metrics.png'/>
+
+This image confirms the results from KNN and SVM, as the accuracy, recall, precision, and f1 scores are at 94% while number of features is above the 100, with a steep decline when they are bellow 100 features. 
 
 ### Confusion Matrix
 
@@ -188,24 +204,40 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 <img src='./images/LASSO-KNN-Confusion-Matrix-1.png'/> 
 
+In this image we can see that there is a clear diagonal line with very litle diviation in the class prediction. 
+
 <img src='./images/LASSO-KNN-Confusion-Matrix-2.png'/> 
 
+As the number of features start to fall bellow 100, we can start to see that there are more diviations from the diagonal, indicating higher instances of misclassification in the prediction.  
+
 <img src='./images/LASSO-KNN-Confusion-Matrix-3.png'/> 
+
+Lastly, with very few number of features, we can see that the confusion matrix has an increased instance of diviation, in particular with 9 features, which shows very high veriation and mislassification.
 
 #### Support Vector Machine
 
 <img src='./images/LASSO-SVM-Confusion-Matrix-1.png'/> 
 
+This image, just like in KNN, shows that the higher number of features have less divergance from the diagonal, this indicates that the accuracy and the TPR is higher overall, howver after 100 features, there are very similar results. 
+
 <img src='./images/LASSO-SVM-Confusion-Matrix-2.png'/>
 
+This image has features between 21 and 12, this also a higher degree of divergance from the diagonal which indicates higher rates of misclassification. 
+
 <img src='./images/LASSO-SVM-Confusion-Matrix-3.png'/> 
+
+This image shows the confusion matrix with 11 and 9 features, both showed a higher degree of divergance from the diagonal and higher instances of misclassification. 
 
 
 #### Random Forest
 
 <img src='./images/LASSO-RF-Confusion-Matrix-1.png'/> 
 
-<img src='./images/LASSO-RF-Confusion-Matrix-2.png'/> 
+The random forest further confirms the findings from KNN and SVM, which indicate that with highe number of features there are less indices of divergance from the diagonal, and thus lower rates the misclassification.   
+
+<img src='./images/LASSO-RF-Confusion-Matrix-2.png'/>  
+
+THis image just in like KNN and SVM shows Lasso with less the 100 features, and thus has much higher divergance from the diagonal and higher instances of missclassification.  
 
 <img src='./images/LASSO-RF-Confusion-Matrix-3.png'/> 
 
@@ -219,6 +251,8 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 <img src='./images/LASSO-KNN-ROC-3.png'/>
 
+All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
+
 #### Support Vector Machine 
 
 <img src='./images/LASSO-SVM-ROC-1.png'/>
@@ -226,6 +260,8 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 <img src='./images/LASSO-SVM-ROC-2.png'/>
 
 <img src='./images/LASSO-SVM-ROC-3.png'/>
+
+All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
 
 
 #### Random Forest
@@ -235,6 +271,8 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 <img src='./images/LASSO-RF-ROC-2.png'/>
 
 <img src='./images/LASSO-RF-ROC-3.png'/>
+
+All this images show how the over TPR rapidly increases when the the number of features increases, but overall there was high rates of True positives with very low instances of False Positive Rate. 
 
 
 ## Recursive Feature Elimination (RFE)
@@ -344,5 +382,5 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 - https://learn.g2.com/k-nearest-neighbor
 - https://www.kdnuggets.com/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html
 		
-
+ 
 
