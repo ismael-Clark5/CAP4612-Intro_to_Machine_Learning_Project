@@ -1,3 +1,4 @@
+<div style="center">
 <h1> Feature Selection Using LASSO, Recursive Feature Elimination, and SelectFromModel </h1>
 
  <p2> Ismael Clark Antonela Radas Hector Ramirez
@@ -6,7 +7,8 @@
 
  Florida International University
  </p2>
-
+ 
+</div>
 <div style="page-break-after: always;"></div>
 
 # Abstract
@@ -79,14 +81,16 @@ A supervised learning and model classification algorithm that helps us find whic
 Supervised machine learning (as opposed to unsupervised machine learning) relies on labeled inputs to learn a function that produces appropriate output when new untagged data is provided. The unsupervised machine learning algorithm uses untagged inputs, in other words, no teacher (shortcut) tells the child (computer) when he is right or when he made a mistake so that he can correct himself. 
 
 ## Support Vector Machine (SVM)
+
+In its basic form, linear partitioning, the SVM tries to find a line that maximizes the separation between the dataset in two 2D spatial point classes. SVM classifies data by finding the best hyperplane that separates all data points of one class from those of another class. The best hyperplane for an SVM is the hyperplane with the largest gap between the two classes. In the SVM algorithm, we are trying to maximize the headroom between data points and hyperplane. 
+The distance between the vector and the hyperplane is called the margin. The distance from the vector to the hyperplane is called the field, which is the distance between the line and the closest point in the class. The hyperplane (line) passes through the maximum field, which is the maximum distance between the data points of the two classes. Then the classification is completed by finding the hyperplane that best distinguishes the two classes. 
+
 ## Random Forest (RF)
-While an estimate of the prediction accuracy is used for the importance of the permutation, in random forests this Gini admixture can be used to measure the informativeness of a function in a model. Swap importance is a measure that tracks the accuracy of a forecast in which variables are randomly swapped from over-the-counter samples. Tree-based algorithms typically use mean for continuous functions or mode for categorical functions when predicting training samples in the regions to which they belong. [Sources: 0, 8, 13] 
+While an estimate of the prediction accuracy is used for the importance of the permutation, in random forests this Gini admixture can be used to measure the informativeness of a function in a model. Swap importance is a measure that tracks the accuracy of a forecast in which variables are randomly swapped from over-the-counter samples. Tree-based algorithms typically use mean for continuous functions or mode for categorical functions when predicting training samples in the regions to which they belong. 
     
-They can also make predictions with high accuracy, stability, and easy interpretation. Therefore, every data scientist should learn these algorithms and use them in their machine learning projects. [Sources: 8] 
-    
-Rainforest Algorithm is an easy-to-use and flexible machine learning algorithm. Random forests or random decision forests is an ensemble learning technique for classification, regression, and other problems that works by constructing multiple decision trees during training and generating a class that is class mode (classification) or mean / mean forecast (regression). ) individual trees. The first random decision forest algorithm was created by Tin Kam Ho [1] using the method of random subspaces [2], which, in the formulation of Hos, is a way to implement the “stochastic discrimination” approach to classification proposed by Eugene Kleinberg. [Sources: 9, 14] 
-    
-To facilitate the systematic and standardized refinement of somatic variants based on cancer sequencing data, random forest (RF) models and a deep learning (DL) approach have been used to demonstrate that these machine learning methods can provide classification efficiency. The classes are high and the same in all refinements of the variants (Ainscough et al., 2018). A machine learning approach called Cerebro improved the accuracy of invoking verified somatic mutations in tumor samples and outperformed many other methods for detecting somatic mutations (Wood et al., 2018). The potential for CNNs to use crude nucleotide sequences to classify cancer mutations was initially explored by using tag coding, hot coding, and embedding to preprocess DNA information. [Sources: 2] 
+They can also make predictions with high accuracy, stability, and easy interpretation. Therefore, every data scientist should learn these algorithms and use them in their machine learning projects. 
+       
+To facilitate the systematic and standardized refinement of somatic variants based on cancer sequencing data, random forest (RF) models and a deep learning (DL) approach have been used to demonstrate that these machine learning methods can provide classification efficiency. The classes are high and the same in all refinements of the variants (Ainscough et al., 2018). A machine learning approach called Cerebro improved the accuracy of invoking verified somatic mutations in tumor samples and outperformed many other methods for detecting somatic mutations (Wood et al., 2018). The potential for CNNs to use crude nucleotide sequences to classify cancer mutations was initially explored by using tag coding, hot coding, and embedding to preprocess DNA information. 
 
 # Results and Evaluation
 ## Lasso
