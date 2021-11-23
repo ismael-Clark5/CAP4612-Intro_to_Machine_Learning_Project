@@ -35,10 +35,23 @@
     - [Confusion Matrix](#confusion-matrix-1)
     - [ROC Curves](#roc-curves-1)
   - [SelectFromModel](#selectfrommodel)
-    - [Pr](#pr)
+    - [t-SNE](#t-sne-2)
+    - [Performance Metrics](#performance-metrics-1)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor)
+      - [Support Vector Machine](#support-vector-machine)
+      - [Random Forest](#random-forest)
+    - [Confusion Matrix](#confusion-matrix-2)
+      - [K-Nearest Neighbor](#k-nearest-neighbor-1)
+      - [Support Vector Machine](#support-vector-machine-1)
+      - [Random Forest](#random-forest-1)
+    - [ROC Curves](#roc-curves-2)
+      - [K-Nearest Neighbor](#k-nearest-neighbor-2)
+      - [Suppport Vector Machine](#suppport-vector-machine)
+      - [Random Forest](#random-forest-2)
 - [Conclusion](#conclusion)
 - [References](#references)
 
+<div style="page-break-after: always;"></div>
 
 # Abstract
 This paper covers the use of several supervised learning aSlgorithms in a  feature selection task on a dataset. This dataset contains normalized long non-coding RNA (lncRNA) expression profiles of 12 cancer types. Each algorithm yields a set of features which are then used by three different classifiers. To check the performance of the classification (for each set of features), the results are evaluated using different performance metrics. 
@@ -213,7 +226,51 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 ## SelectFromModel 
 
-### Pr
+### t-SNE
+
+<img src="./images/SFM%20TSNE.png" />
+
+### Performance Metrics 
+
+#### K-Nearest-Neighbor
+
+<img src="./images/SFM-KNN-Performance-Metrics.png"/>
+
+#### Support Vector Machine
+
+<img src="./images/SFM-SVM-Performance-Metrics.png">
+
+#### Random Forest
+
+<img src="./images/SFM-RF-Performance-Metrics.png">
+
+### Confusion Matrix 
+
+#### K-Nearest Neighbor 
+
+<img src="./images/SFM-KNN-Confusion-Matrix.png">
+
+#### Support Vector Machine
+
+<img src="./images/SFM-SVM-Confusion-Matrix.png">
+
+#### Random Forest 
+
+<img src="./images/SFM-RF-Confusion-Matrix.png">
+
+### ROC Curves 
+
+#### K-Nearest Neighbor
+
+<img src="./images/SFM-KNN-ROC-Curves.png">
+
+#### Suppport Vector Machine 
+
+<img src="./images/SFM-SVM-ROC-Curves.png">
+
+#### Random Forest 
+
+<img src="./images/SFM-RF-ROC-Curves.png">
 
 # Conclusion
 
