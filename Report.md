@@ -153,6 +153,26 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 
 ## Recursive Feature Elimination (RFE)
+
+### t-SNE 
+<img src='./images/RFE TSNE.png'>
+
+### Performance Metrics 
+
+<img src='./images/RFE-KNN-Performance-Metrics.png' />
+
+<img src="./images/RFE-SVM-Performance-Matrics.png" />
+
+<img src="./images/RFE-RF-Performance-Metrics.png" />
+
+### Confusion Matrix 
+
+<img src="./images/RFE-KNN-Confusion-Matrix.png"/>
+
+<img src="./images/RFE-SVM-Confusion-Matrix.png" />
+
+<img src='./images/RFE-RF-Confusion-Matrix.png' />
+
 ## SelectFromModel 
 
 # Conclusion
