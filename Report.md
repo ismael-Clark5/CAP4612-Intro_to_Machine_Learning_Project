@@ -11,8 +11,11 @@
 </div>
 <div style="page-break-after: always;"></div>
 
-<h1> Table of Contents <h1>
+______________________________________________
 
+<h3>Table of Contents<h3>
+
+______________________________________________
 - [Abstract](#abstract)
 - [Introduction](#introduction)
 - [Feature Selection Models](#feature-selection-models)
@@ -27,27 +30,45 @@
   - [Lasso](#lasso-1)
     - [t-SNE](#t-sne)
     - [Performance Matrics](#performance-matrics)
-    - [Confusion Matrix](#confusion-matrix)
-    - [ROC Curves](#roc-curves)
-  - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe-1)
-    - [t-SNE](#t-sne-1)
-    - [Performance Metrics](#performance-metrics)
-    - [Confusion Matrix](#confusion-matrix-1)
-    - [ROC Curves](#roc-curves-1)
-  - [SelectFromModel](#selectfrommodel)
-    - [t-SNE](#t-sne-2)
-    - [Performance Metrics](#performance-metrics-1)
       - [K-Nearest-Neighbor](#k-nearest-neighbor)
       - [Support Vector Machine](#support-vector-machine)
       - [Random Forest](#random-forest)
-    - [Confusion Matrix](#confusion-matrix-2)
-      - [K-Nearest Neighbor](#k-nearest-neighbor-1)
+    - [Confusion Matrix](#confusion-matrix)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-1)
       - [Support Vector Machine](#support-vector-machine-1)
       - [Random Forest](#random-forest-1)
-    - [ROC Curves](#roc-curves-2)
-      - [K-Nearest Neighbor](#k-nearest-neighbor-2)
-      - [Suppport Vector Machine](#suppport-vector-machine)
+    - [ROC Curves](#roc-curves)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-2)
+      - [Support Vector Machine](#support-vector-machine-2)
       - [Random Forest](#random-forest-2)
+  - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe-1)
+    - [t-SNE](#t-sne-1)
+    - [Performance Metrics](#performance-metrics)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-3)
+      - [Support Vector Machine](#support-vector-machine-3)
+      - [Random Forest](#random-forest-3)
+    - [Confusion Matrix](#confusion-matrix-1)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-4)
+      - [Support Vector Machine](#support-vector-machine-4)
+      - [Random Forest](#random-forest-4)
+    - [ROC Curves](#roc-curves-1)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-5)
+      - [Support Vector Machine](#support-vector-machine-5)
+      - [Random Forest](#random-forest-5)
+  - [SelectFromModel](#selectfrommodel)
+    - [t-SNE](#t-sne-2)
+    - [Performance Metrics](#performance-metrics-1)
+      - [K-Nearest-Neighbor](#k-nearest-neighbor-6)
+      - [Support Vector Machine](#support-vector-machine-6)
+      - [Random Forest](#random-forest-6)
+    - [Confusion Matrix](#confusion-matrix-2)
+      - [K-Nearest Neighbor](#k-nearest-neighbor-7)
+      - [Support Vector Machine](#support-vector-machine-7)
+      - [Random Forest](#random-forest-7)
+    - [ROC Curves](#roc-curves-2)
+      - [K-Nearest Neighbor](#k-nearest-neighbor-8)
+      - [Suppport Vector Machine](#suppport-vector-machine)
+      - [Random Forest](#random-forest-8)
 - [Conclusion](#conclusion)
 - [References](#references)
 
@@ -147,13 +168,23 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 ### Performance Matrics 
 
+
+#### K-Nearest-Neighbor
+
 <img src='./images/LASSO-KNN-Performance-Metrics.png'/>
 
+#### Support Vector Machine
+
 <img src='./images/LASSO-SVM-Performance-Metrics.png'/>
+
+#### Random Forest
 
 <img src='./images/LASSO-RF-Performance-Metrics.png'/>
 
 ### Confusion Matrix
+
+
+#### K-Nearest-Neighbor
 
 <img src='./images/LASSO-KNN-Confusion-Matrix-1.png'/> 
 
@@ -161,11 +192,16 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 <img src='./images/LASSO-KNN-Confusion-Matrix-3.png'/> 
 
+#### Support Vector Machine
+
 <img src='./images/LASSO-SVM-Confusion-Matrix-1.png'/> 
 
 <img src='./images/LASSO-SVM-Confusion-Matrix-2.png'/>
 
 <img src='./images/LASSO-SVM-Confusion-Matrix-3.png'/> 
+
+
+#### Random Forest
 
 <img src='./images/LASSO-RF-Confusion-Matrix-1.png'/> 
 
@@ -175,17 +211,24 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 ### ROC Curves 
 
+#### K-Nearest-Neighbor
+
 <img src='./images/LASSO-KNN-ROC-1.png'/>
 
 <img src='./images/LASSO-KNN-ROC-2.png'/>
 
 <img src='./images/LASSO-KNN-ROC-3.png'/>
 
+#### Support Vector Machine 
+
 <img src='./images/LASSO-SVM-ROC-1.png'/>
 
 <img src='./images/LASSO-SVM-ROC-2.png'/>
 
 <img src='./images/LASSO-SVM-ROC-3.png'/>
+
+
+#### Random Forest
 
 <img src='./images/LASSO-RF-ROC-1.png'/>
 
@@ -202,25 +245,43 @@ To facilitate the systematic and standardized refinement of somatic variants bas
 
 ### Performance Metrics 
 
+#### K-Nearest-Neighbor
+
 <img src='./images/RFE-KNN-Performance-Metrics.png' />
 
+#### Support Vector Machine 
+
 <img src="./images/RFE-SVM-Performance-Metrics.png" />
+
+#### Random Forest
 
 <img src="./images/RFE-RF-Performance-Metrics.png" />
 
 ### Confusion Matrix 
 
+#### K-Nearest-Neighbor
+
 <img src="./images/RFE-KNN-Confusion-Matrix.png"/>
 
+#### Support Vector Machine 
+
 <img src="./images/RFE-SVM-Confusion-Matrix.png" />
+
+#### Random Forest
 
 <img src='./images/RFE-RF-Confusion-Matrix.png' />
 
 ### ROC Curves 
 
+#### K-Nearest-Neighbor
+
 <img src='./images/RFE-KNN-ROC-Curves.png' />
 
+#### Support Vector Machine 
+
 <img src='./images/RFE-SVM-ROC-Curves.png' />
+
+#### Random Forest
 
 <img src='./images/RFE-RF-ROC-Curves.png' />
 
