@@ -281,25 +281,35 @@ All this images show how the over TPR rapidly increases when the the number of f
 
 <img src='./images/RFE TSNE.png'>
 
+This figure is a really good example of how the clustering improves as the number of features increases. We can see a clear progression from iregular, choatic clustering to more organized grouped clusters. 
+
 ### Performance Metrics 
 
 #### K-Nearest-Neighbor
 
 <img src='./images/RFE-KNN-Performance-Metrics.png' />
 
+This figure shows that overall there is great increase in accuracy when the number of features increase, with maximum accuracy of 95% reached with 100 features, this result can be observed accross all metrics of accuracy, recall, precision, and f1. 
+
 #### Support Vector Machine 
 
 <img src="./images/RFE-SVM-Performance-Metrics.png" />
 
+SVM results further validate the results obtained in KNN, as the mean accuracy, mean precision, mean recall, and mean f1 both increased in direct connection with the number of features selected from RFE. 
+
 #### Random Forest
 
 <img src="./images/RFE-RF-Performance-Metrics.png" />
+
+Random Forest as compared to KNN and SVM show a slightly diffrent image, with the accuracy, recall, precision and f1 both increasing with number of features, till around 60 features, where there is a slight decline, with another increase at 100 features. 
 
 ### Confusion Matrix 
 
 #### K-Nearest-Neighbor
 
 <img src="./images/RFE-KNN-Confusion-Matrix.png"/>
+
+The confusion matrix with KNN shows as the number of features increase there is less divergance from the diagonal, indicating that the rates of missclassification are reduced as the number of features selected increase. 
 
 #### Support Vector Machine 
 
