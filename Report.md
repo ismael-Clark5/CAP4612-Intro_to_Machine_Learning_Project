@@ -261,6 +261,8 @@ THis image just in like KNN and SVM shows Lasso with less the 100 features, and 
 
 <img src='./images/LASSO-RF-Confusion-Matrix-3.png'/> 
 
+This image shows the extreme case, where even more divergence from the diagonal, indicating that there are higher instances of misclassification in the model. specially with classes 8 and 7,  hiving a high decree of misclassification in the model.
+
 <div style="page-break-after: always;"></div>
 
 ### ROC Curves 
@@ -322,17 +324,25 @@ This section we will talk about how the performance metrics, average accurace, a
 
 This figure shows that overall there is great increase in accuracy when the number of features increase, with maximum accuracy of 95% reached with 100 features, this result can be observed accross all metrics of accuracy, recall, precision, and f1. 
 
+<div style="page-break-after: always;"></div>
+
 #### Support Vector Machine 
 
 <img src="./images/RFE-SVM-Performance-Metrics.png" />
 
 SVM results further validate the results obtained in KNN, as the mean accuracy, mean precision, mean recall, and mean f1 both increased in direct connection with the number of features selected from RFE. 
 
+<div style="page-break-after: always;"></div>
+
+
 #### Random Forest
 
 <img src="./images/RFE-RF-Performance-Metrics.png" />
 
 Random Forest as compared to KNN and SVM show a slightly diffrent image, with the accuracy, recall, precision and f1 both increasing with number of features, till around 60 features, where there is a slight decline, with another increase at 100 features. 
+
+<div style="page-break-after: always;"></div>
+
 
 ### Confusion Matrix 
 
@@ -342,11 +352,16 @@ Random Forest as compared to KNN and SVM show a slightly diffrent image, with th
 
 The confusion matrix with KNN shows as the number of features increase there is less divergance from the diagonal, indicating that the rates of missclassification are reduced as the number of features selected increase. 
 
+<div style="page-break-after: always;"></div>
+
 #### Support Vector Machine 
 
 <img src="./images/RFE-SVM-Confusion-Matrix.png" />
 
-SVM validates the results from KNN, where as the number of features selected increase, the overall diversion decre 
+SVM validates the results from KNN, where as the number of features selected increase, the overall diversion decreses as the number of features goes up. with 100 features there are very minimal varience. 
+
+<div style="page-break-after: always;"></div>
+
 
 #### Random Forest
 
@@ -413,12 +428,16 @@ In this figure we can see how the accuracy quickly rices to 94% as the number of
 
 <img src="./images/SFM-SVM-Performance-Metrics.png">
 
+When it comes to Support Vector Machine, we see the standard increase in overall accuracy as the number of features increases, however after 4 features we actaully decrease the acuarcy slightly, with another improvement in average accuracy after 60 features. 
+
 <div style="page-break-after: always;"></div>
 
 
 #### Random Forest
 
 <img src="./images/SFM-RF-Performance-Metrics.png">
+
+Random Forest, in contrast to Support Vector Machine, observes a constant increase in the overall metrics as the number of features increase. However diminishing returns are clearly observed after 80 features, where the persentage increase is very minimal. 
 
 <div style="page-break-after: always;"></div>
 
@@ -429,6 +448,8 @@ In this figure we can see how the accuracy quickly rices to 94% as the number of
 
 <img src="./images/SFM-KNN-Confusion-Matrix.png">
 
+When it comes to KNN, we can see that overall there is a very well defined diagonal with very small diviations with all number of features, after all, even with 20 features, the accuracy is over 90%, howver we we increase the number of features, we do see some small reduction in the total number of diviations observed, specially when comparing class 2 being misscategorized as class 10 with 20 number of features, and the occurance of this decreasing as the number of features increase.
+
 <div style="page-break-after: always;"></div>
 
 
@@ -436,12 +457,16 @@ In this figure we can see how the accuracy quickly rices to 94% as the number of
 
 <img src="./images/SFM-SVM-Confusion-Matrix.png">
 
+In the Support Vector machine, just like KNN, there is a very well defined diagonal, indication good accuracy in the model, however there are still some diversions, speciall with class 2, sometimes being classified as class 11, as the numbers of features increases, this does improve, however it is not completelt eleminated from the model. 
+
 <div style="page-break-after: always;"></div>
 
 
 #### Random Forest 
 
 <img src="./images/SFM-RF-Confusion-Matrix.png">
+
+Random Forest Classifier, shows a similar response in the confusion matrix, a very well defined diagonal, with some slight missclassification, just like with Support Vector Machine, the model some times missclissifies class 2 as class 11, the occurance does decrease as the number of features increases, but the behavior is not completely eliminated from the model. 
 
 <div style="page-break-after: always;"></div>
 
@@ -452,6 +477,8 @@ In this figure we can see how the accuracy quickly rices to 94% as the number of
 
 <img src="./images/SFM-KNN-ROC-Curves.png">
 
+The ROC curves for KNN, shows the same behavior as seen in the confusion matrix, most classes have a very high True Positive Rate, however, classes 2 and 11 have a lower True Positive Rates (indicated with lower area under curve). As the number of features increases, we can see how the overall true positive rate increases for both classes, while not entirely reaching the same as the other classes, the overall area under the curve improves significantly. 
+
 <div style="page-break-after: always;"></div>
 
 
@@ -459,11 +486,15 @@ In this figure we can see how the accuracy quickly rices to 94% as the number of
 
 <img src="./images/SFM-SVM-ROC-Curves.png">
 
+In Support Vector Machine, the ROC curves show a very good true positive rates for all classes, however class 2 and 11 still have the lowest area under the curve values, indicating that they still have issues with missclassication, although to a lower degree. 
+
 <div style="page-break-after: always;"></div>
 
 #### Random Forest 
 
 <img src="./images/SFM-RF-ROC-Curves.png">
+
+Just like Support Vector machine the ROC curve seems quite homogenious, with all classes performing well. Once more class 2 and 11 have some of the lowest scores in low feature counts, however class 2 reaches as high as 1 for area under the curve when the number of features increase. 
 
 <div style="page-break-after: always;"></div>
 
