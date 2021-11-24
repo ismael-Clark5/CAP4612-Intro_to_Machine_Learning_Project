@@ -187,6 +187,8 @@ Lastly, this image shows lasso with 11 and 9 features selected. In this images t
 
 ### Performance Matrics 
 
+This section we will talk about how the performance metrics, average accurace, average recall, average precision, and average f1, change overtime with the number of features increase, using LASSO for Feature Selection and is verified using Stratified K fold, with 5 folds on each run.  
+
 
 #### K-Nearest-Neighbor
 
@@ -194,11 +196,16 @@ Lastly, this image shows lasso with 11 and 9 features selected. In this images t
 
 When running KNN on the data set with the LASSO selected feature, we can see that with high number of feature selection overall accuracy, precision, recall and f1 are around 94%, with a rapid decline when the number of features falls bellow 100. 
 
+<div style="page-break-after: always;"></div>
+
 #### Support Vector Machine
 
 <img src='./images/LASSO-SVM-Performance-Metrics.png'/>
 
 When running the same features through SVM we can see that just like KNN, SVM shows very high accuracy, precision, recall, and f1, with a sharap and rapid decline with the number of features fall bellow 100, this seems to indicate that optimal number of features is somewhere around the 100 features mark, with smaller gains as number of features increase. 
+
+<div style="page-break-after: always;"></div>
+
 
 #### Random Forest
 
@@ -306,6 +313,9 @@ This figure is a really good example of how the clustering improves as the numbe
 
 ### Performance Metrics 
 
+This section we will talk about how the performance metrics, average accurace, average recall, average precision, and average f1, change overtime with the number of features increase, using Recursive Feature Elimination for Feature Selection and is verified using Stratified K fold, with 5 folds on each run.  
+
+
 #### K-Nearest-Neighbor
 
 <img src='./images/RFE-KNN-Performance-Metrics.png' />
@@ -342,6 +352,8 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src='./images/RFE-RF-Confusion-Matrix.png' />
 
+Random Forest, just like KNN, shows a progression from Confusion matriz with higher instances of divergance to a matrix with lower indices of misclassification. 
+
 <div style="page-break-after: always;"></div>
 
 ### ROC Curves 
@@ -350,9 +362,16 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src='./images/RFE-KNN-ROC-Curves.png' />
 
+The ROC curve here shows that with lower number of features, some clases have higher indices of misclassification, in particular class 2 and 11, show a high degree of missclassification, while with higher number of features, they are indistinguishable from the other classes in therms of missclassification.
+
+<div style="page-break-after: always;"></div>
+
+
 #### Support Vector Machine 
 
 <img src='./images/RFE-SVM-ROC-Curves.png' />
+
+When it comes to Support Vector machine, the missclassification is not as bad when compared to KNN, however, Class 2 still has a higher incidence rate with low number of features, but quicjly raises the the normal with more features. 
 
 <div style="page-break-after: always;"></div>
 
@@ -360,6 +379,8 @@ SVM validates the results from KNN, where as the number of features selected inc
 #### Random Forest
 
 <img src='./images/RFE-RF-ROC-Curves.png' />
+
+Random Forest in contrast showes very little diffrence in its ROC curves when the number of features changes, in general all classes are performing well in classification and True Positive Rates. 
 
 <div style="page-break-after: always;"></div>
 
@@ -370,14 +391,20 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 <img src="./images/SFM%20TSNE.png" />
 
+In this figure t-SNE is an ideal representation of how classes go from a very deeply coupled clustering to sparsely separated, tightly bound clusters of classes as the number of features increases, thus helping increase the overall accuracy of the algorithm. 
+
 <div style="page-break-after: always;"></div>
 
 
 ### Performance Metrics 
 
+This section we will talk about how the performance metrics, average accurace, average recall, average precision, and average f1, change overtime with the number of features increase, using SelectFromModel for Feature Selection and is verified using Stratified K fold, with 5 folds on each run.  
+
 #### K-Nearest-Neighbor
 
 <img src="./images/SFM-KNN-Performance-Metrics.png"/>
+
+In this figure we can see how the accuracy quickly rices to 94% as the number of features selected using SelectFromModel increse, eventually hitting a platoe with only minimal improbements, for SVM with KNN, this appears to be around 40 Features. 
 
 <div style="page-break-after: always;"></div>
 
@@ -442,6 +469,9 @@ SVM validates the results from KNN, where as the number of features selected inc
 
 
 # Conclusion
+
+<div style="page-break-after: always;"></div>
+
 
 # References	
 - http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html 
