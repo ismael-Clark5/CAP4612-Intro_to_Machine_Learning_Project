@@ -185,7 +185,7 @@ Lastly, this image shows lasso with 11 and 9 features selected. In this images t
 
 <div style="page-break-after: always;"></div>
 
-### Performance Matrics 
+### Performance Metrics 
 
 This section we will talk about how the performance metrics, average accurace, average recall, average precision, and average f1, change overtime with the number of features increase, using LASSO for Feature Selection and is verified using Stratified K fold, with 5 folds on each run.  
 
@@ -500,8 +500,9 @@ Just like Support Vector machine the ROC curve seems quite homogenious, with all
 
 
 # Conclusion
-In general, two main conclusion can be drawn from the resuts of the project. First, the cancer types that have the least number of samples are the ones that showed wrose clustering results during the tSNE phase. These were usually clustered on top of other cancer types with more samples. Second, there is a clear relation between the number of features and the performance of the classifiers. More sparcity can be appreciated in the confusion matrix, as well as poorer clustering, when the number of features decrease, speacially obvious with the LASSO model. 
-Finally, we can conclude that the best pair of model/number of features is: 
+In general, two main conclusion can be drawn from the resuts of the project. First, the cancer types that have the least number of samples are the ones that showed wrose clustering results during the tSNE phase. These were usually clustered on top of other cancer types with more samples. Second, there is a clear relation between the number of features and the performance of the classifiers. More sparcity can be appreciated in the confusion matrix, as well as poorer clustering, when the number of features decrease, speacially obvious with the LASSO model. Here, the clustering for 512 shows clear distinctions between the cancer types, while with 9 features there is significant mudding in the center. 
+Finally, we can conclude that the best pair of model/number of features is: LASSO with 512 features. However, is the number of features and not the model itself that yielded these results. It would have to be compared with the other feature selection models using the same number of features in order to more meaningfully compare their performance. 
+Between the two feature selection models that extracted the same number of features there is no significant difference in performance (0.05 for mean accuracy in the classifers). It is interesting to see how the mean accuracy decreases for 60 features for SVM (against 40) and 60 features for RFE (against 80) for RFE and SFM respectively. However, the performace matrix and tSNE are similar.
 <div style="page-break-after: always;"></div>
 
 
