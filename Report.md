@@ -500,7 +500,8 @@ Just like Support Vector machine the ROC curve seems quite homogenious, with all
 
 
 # Conclusion
-
+In general, two main conclusion can be drawn from the resuts of the project. First, the cancer types that have the least number of samples are the ones that showed wrose clustering results during the tSNE phase. These were usually clustered on top of other cancer types with more samples. Second, there is a clear relation between the number of features and the performance of the classifiers. More sparcity can be appreciated in the confusion matrix, as well as poorer clustering, when the number of features decrease, speacially obvious with the LASSO model. 
+Finally, we can conclude that the best pair of model/number of features is: 
 <div style="page-break-after: always;"></div>
 
 
