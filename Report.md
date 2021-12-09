@@ -22,7 +22,7 @@ ______________________________________________
 
 - [Abstract](#abstract)
 - [Introduction](#introduction)
-- [Feature Selection Models](#feature-selection-models)
+- [Datasets and Methodology](#datasets-and-methodology)
   - [LASSO](#lasso)
   - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe)
   - [SelectFromModel (SFM)](#selectfrommodel-sfm)
@@ -33,7 +33,7 @@ ______________________________________________
 - [Results and Evaluation](#results-and-evaluation)
   - [Lasso](#lasso-1)
     - [t-SNE](#t-sne)
-    - [Performance Matrics](#performance-matrics)
+    - [Performance Metrics](#performance-metrics)
       - [K-Nearest-Neighbor](#k-nearest-neighbor)
       - [Support Vector Machine](#support-vector-machine)
       - [Random Forest](#random-forest)
@@ -47,7 +47,7 @@ ______________________________________________
       - [Random Forest](#random-forest-2)
   - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe-1)
     - [t-SNE](#t-sne-1)
-    - [Performance Metrics](#performance-metrics)
+    - [Performance Metrics](#performance-metrics-1)
       - [K-Nearest-Neighbor](#k-nearest-neighbor-3)
       - [Support Vector Machine](#support-vector-machine-3)
       - [Random Forest](#random-forest-3)
@@ -61,7 +61,7 @@ ______________________________________________
       - [Random Forest](#random-forest-5)
   - [SelectFromModel](#selectfrommodel)
     - [t-SNE](#t-sne-2)
-    - [Performance Metrics](#performance-metrics-1)
+    - [Performance Metrics](#performance-metrics-2)
       - [K-Nearest-Neighbor](#k-nearest-neighbor-6)
       - [Support Vector Machine](#support-vector-machine-6)
       - [Random Forest](#random-forest-6)
@@ -108,7 +108,7 @@ Among the different feature selection techniques figure:
 
 The algorithms from the supervised learning category were used during this project.
  
-# Feature Selection Models
+# Datasets and Methodology
 
 ## LASSO
 Least Absolute Shrinkage and Selection Operator (Lasso)
@@ -122,7 +122,7 @@ $$ -->
 
 <div align="center"><img src="svg/CuraKlP9yk.svg"></div>
 
-where <!-- $\alpha _{j}$ --> <img src="svg/BbPDAnAX6S.svg"> is the coefficient of the j-th feature. The final term is called l1 penalty and α is a hyperparameter that tunes the intensity of this penalty term. The higher the coefficient of a feature, the higher the value of the cost function. This model seeks to optimize the cost function reducing the value of the coefficient. The values must be scaled to achieve meaningful results. 
+where $\alpha _{j}$ is the coefficient of the j-th feature. The final term is called l1 penalty and α is a hyperparameter that tunes the intensity of this penalty term. The higher the coefficient of a feature, the higher the value of the cost function. This model seeks to optimize the cost function reducing the value of the coefficient. The values must be scaled to achieve meaningful results. 
 
 While implementing the model, using the LassoCV library from the sklearn.linear_model package. Also,  <!-- $a_i=i-1+0.1$ --> <img src="svg/n7rvM00GHn.svg"> | <!-- $0=0.01\space and\space i \in [0,10)$ --> <img  src="svg/ID7bLmmnR1.svg">. Each one of these values of alpha yielded a set of features which were stored for later analysis.
 
